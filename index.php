@@ -34,3 +34,30 @@ function initialiserEmployes(): array {
     ];
 }
 $employes = initialiserEmployes();
+
+function recupererDepartements(array $employes): array {
+    $departements = [];
+    $nbDepartements = 0;
+
+    
+    for ($i = 0; $i < count($employes); $i++) {
+        $departementCourant = $employes[$i]['departement'];
+        $dejaPresent = false;
+
+        
+        for ($j = 0; $j < $nbDepartements; $j++) {
+            if ($departements[$j]['code'] === $departementCourant['code']) {
+                $dejaPresent = true;
+                break;
+            }
+        }
+
+    
+        if (!$dejaPresent) {
+            $departements[$nbDepartements] = $departementCourant;
+            $nbDepartements++;
+        }
+    }
+
+    return $departements;
+}
